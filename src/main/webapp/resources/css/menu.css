@@ -1,0 +1,52 @@
+/*
+Error: File to import not found or unreadable: compass/css3.
+       Load path: C:/dev/workspaces/eclipse-workspace/c4l_server/src/main/webapp/resources/sass
+        on line 3 of C:/dev/workspaces/eclipse-workspace/c4l_server/src/main/webapp/resources/sass/menu.scss
+
+1: @charset "ISO-8859-1";
+2: 
+3: @import "compass/css3";
+4: 
+5: // CUSTOMIZE //
+6: 
+7: $speed: 0.5s; // SET speed for sidebar animation
+8: $sidebarcolor: #b3c33a; // SET page color
+
+Backtrace:
+C:/dev/workspaces/eclipse-workspace/c4l_server/src/main/webapp/resources/sass/menu.scss:3
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/import_node.rb:67:in `import'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/import_node.rb:28:in `imported_file'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/import_node.rb:35:in `css_import?'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:313:in `visit_import'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:36:in `visit'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
+uri:classloader:/gems/sass-3.4.24/lib/sass/stack.rb:79:in `block in with_base'
+uri:classloader:/gems/sass-3.4.24/lib/sass/stack.rb:115:in `with_frame'
+uri:classloader:/gems/sass-3.4.24/lib/sass/stack.rb:79:in `with_base'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:160:in `visit'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+org/jruby/RubyArray.java:2486:in `map'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:36:in `visit'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:159:in `visit'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:8:in `visit'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/root_node.rb:36:in `css_tree'
+uri:classloader:/gems/sass-3.4.24/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+uri:classloader:/gems/sass-3.4.24/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+uri:classloader:/gems/sass-3.4.24/lib/sass/engine.rb:298:in `render_with_sourcemap'
+uri:classloader:/gems/sass-3.4.24/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+uri:classloader:/gems/sass-3.4.24/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+org/jruby/RubyArray.java:1734:in `each'
+uri:classloader:/gems/sass-3.4.24/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+uri:classloader:/gems/sass-3.4.24/lib/sass/plugin.rb:82:in `update_stylesheets'
+<script>:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: compass/css3.\A        Load path: C:/dev/workspaces/eclipse-workspace/c4l_server/src/main/webapp/resources/sass\A         on line 3 of C:/dev/workspaces/eclipse-workspace/c4l_server/src/main/webapp/resources/sass/menu.scss\A \A 1: @charset \"ISO-8859-1\";\A 2: \A 3: @import \"compass/css3\";\A 4: \A 5: // CUSTOMIZE //\A 6: \A 7: $speed: 0.5s; // SET speed for sidebar animation\A 8: $sidebarcolor: #b3c33a; // SET page color"; }
