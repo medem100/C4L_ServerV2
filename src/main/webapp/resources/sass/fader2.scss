@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
     font-family: "Roboto Lato", sans-serif;
     font-size: 13pt;
@@ -175,3 +176,182 @@ $green-color : #64C96B;
   }   
 }
   
+=======
+* {
+    font-family: "Roboto Lato", sans-serif;
+    font-size: 13pt;
+}
+$black-color : #151515;
+$red-color : #B02026;
+$yellow-color : #FFCF00;
+$gray-color : #999999;
+$white-color : #F2F2F2;
+$blue-color : #00A7E3;
+$green-color : #64C96B;
+/*
+* background defenitions
+*/
+.backgroundGray { background-color: $gray-color;}
+.backgroundBlack { background-color: $black-color;}
+.backgroundWhite { background-color: $white-color;}
+.backgroundRed { background-color: $red-color; }
+.backgroundYellow { background-color: $yellow-color; }
+.backgroundBlue { background-color: $blue-color;}
+  
+.content { 
+    display: block;
+    width: max-content;
+    height: 470px; /*470*/
+    overflow: hidden;
+  .table { 
+      display:flex;
+      justify-content: center;
+      position:relative;
+
+    .item {
+      border: 1px solid #000;      
+      border-radius: 5px;
+
+      .fader {
+          width: 80px; 
+          height: 360px; /*100 390*/
+          overflow: visible;
+
+          .subtitleFader,
+          .subtitleFaderValue,
+          .subtitleFaderDevice { 
+              width: 88px; /*100*/
+              position: absolute;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              text-align: center;
+          }
+
+          .subtitleFader { 
+              top: 2px;
+              font-size: 11pt;
+          }
+
+          .subtitleFaderValue { bottom: 40px;
+          color:#000000 }
+          
+          .subtitleFaderDevice { 
+              top: 18px; /*18*/
+              font-size: 13pt;
+          }
+
+          .slider {
+              -webkit-appearance: none;
+              width: 280px;
+              height: 10px;
+              border-radius: 5px;
+              background: #d3d3d3;
+              outline: none;
+              margin: 195px 0 0 -100px;
+              -webkit-transition: .2s;
+              transition: opacity .2s;
+              -ms-transform: rotate(90deg); /* IE 9 */
+              -webkit-transform: rotate(90deg); /* Safari 3-8 */
+              transform: rotate(-90deg);
+          }
+
+          .slider::-webkit-slider-thumb:hover { opacity: 1; }
+          .slider::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              width: 40px;
+              height: 80px;
+              border: 0;
+              background: url('https://svgshare.com/i/7c3.svg');
+              cursor: pointer;
+              background-size: 40px 80px;
+              transform: rotate(90deg);
+              opacity: 0.9;
+          }
+
+          .slider::-moz-range-thumb{
+          -webkit-appearance: none;
+          appearance: none;
+          width: 40px;
+          height: 80px;
+          border: 0;
+          background: url('https://svgshare.com/i/7c3.svg');
+          cursor: pointer;
+          background-size: 40px 80px;
+          transform: rotate(90deg);
+          opacity: 0.9;
+          }
+
+          /* switch*/
+      /* The switch - the box around the slider */
+      }
+      .muteButton {
+        color: $white-color;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+
+          
+          .switch input {display:none;}
+          
+          .slider {
+            position: absolute;
+
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $red-color;
+            -webkit-transition: .4s;
+            transition: .4s;
+          }
+          
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+          }
+          
+          input:checked + .slider {
+            background-color: $green-color;
+          }
+          
+          input:focus + .slider {
+            box-shadow: 0 0 1px $red-color;
+          }
+          
+          input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+          }
+          
+          /* Rounded sliders */
+          .slider.round {
+            border-radius: 34px;
+          }
+          
+          .slider.round:before {
+            border-radius: 50%;
+          }
+        }
+      }
+    } 
+  }   
+}
+  
+>>>>>>> branch 'master' of https://github.com/medem100/C4L_ServerV2.git
