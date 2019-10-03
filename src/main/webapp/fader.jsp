@@ -11,8 +11,10 @@
 
 
 <link rel="stylesheet" type="text/css" href="resources/css/fader2.css">
+  
 <link rel="stylesheet" type="text/css"
 	href="resources/css/masterStyle.css">
+
 
 <script src="https://code.jquery.com/jquery-3.4.0.js"
 	integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
