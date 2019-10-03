@@ -11,9 +11,10 @@
 
 
 <link rel="stylesheet" type="text/css" href="resources/css/fader2.css">
+<!--  
 <link rel="stylesheet" type="text/css"
 	href="resources/css/masterStyle.css">
-
+-->
 <script src="https://code.jquery.com/jquery-3.4.0.js"
 	integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
 	crossorigin="anonymous"></script>
@@ -21,150 +22,237 @@
 	integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
 	crossorigin="anonymous"></script>
 
+
+
+<style>
+/* Farbangaben und ähnliche rein optische Formatierungen weggelassen */
+body {
+	/*  font: 120% sans-serif; */
+	display: grid;
+	/* dreispaltige Darstellung */
+	grid-template-areas:
+	 "nav header header header" 
+	 "nav effecte fader devices"
+	"nav scenen faderS devices" 
+	"nav footer footer footer";
+	grid-template-columns: 5em 1fr 4fr 1fr;
+}
+
+fader {
+	grid-area: fader;
+/**	margin-left: auto;
+	margin-right: auto;
+	width: 80%; **/
+}
+
+effecte {
+	grid-area: effecte;
+}
+
+faderS {
+	grid-area: faderS;
+}
+
+devices {
+	grid-area: devices;
+}
+
+header {
+	grid-area: header;
+}
+
+scenen {
+	grid-area: scenen;
+	
+}
+
+nav{
+	grid-area: nav;
+}
+
+
+
+footer{
+	grid-area: footer;
+
+}
+/* zweispaltige Darstellung */
+@media all and (max-width: 50em) {
+	body {
+		grid-template-areas: 
+		"nav header header" 
+		"nav fader fader" 
+		"nav faderS scenen"
+		"nav effecte devices" 
+		"nav footer footer";
+		grid-template-columns: 1fr 2fr 2fr;
+	}
+}
+/* einspaltige Darstellung */
+@media all and (max-width: 30em) {
+	body {
+		display: block;
+	}
+}
+</style>
+
+
+
 <%@ include file="resources/html/header/menuHader.html"%>
 
 </head>
 <body>
 	<!-- MAIN Context -->
+
+
+	<header>
+	<h1>Debug Page</h1>
+	</header>
+	
+	<nav>
 	<%@ include file="resources/html/menu.html"%>
-	<div class="mainContent">
-		<h1>Debug Page</h1>
+	</nav>
 
-		<!-- DMX Channel Fader -->
-		<div id="app" class="content">
-			<div class="table">
-				<div v-on:input="changeFader(fader)" v-for="fader in channels"
-					class="item backgroundWhite">
-					<div class="fader">
-						<input v-model="fader.lum" type="range" min="0" max="255"
-							value="0" class="slider" id="myRange"> <label
-							class="subtitleFader backgroundYellow">CH.
-							{{fader.channel}} </label> <label
-							class="subtitleFaderDevice backgroundYellow">
-							{{fader.device}} </label> <label class="subtitleFaderValue">
-							{{fader.lum}}</label>
+	<!-- DMX Channel Fader -->
+	<fader>
+	<div id="app" class="content">
+		<div class="table">
+			<div v-on:input="changeFader(fader)" v-for="fader in channels"
+				class="item backgroundWhite">
+				<div class="fader">
+					<input v-model="fader.lum" type="range" min="0" max="255" value="0"
+						class="slider" id="myRange"> <label
+						class="subtitleFader backgroundYellow">CH.
+						{{fader.channel}} </label> <label
+						class="subtitleFaderDevice backgroundYellow">
+						{{fader.device}} </label> <label class="subtitleFaderValue">
+						{{fader.lum}}</label>
 
-					</div>
-					<div class="muteButton backgroundBlack">
-						<span class="">Mute</span> <label class="switch"> <input
-							v-on:input="changeFader" type="checkbox" v-model="fader.mute">
-							<span class="slider round"></span>
-						</label>
-					</div>
+				</div>
+				<div class="muteButton backgroundBlack">
+					<span class="">Mute</span> <label class="switch"> <input
+						v-on:input="changeFader" type="checkbox" v-model="fader.mute">
+						<span class="slider round"></span>
+					</label>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- special fader / Speed and Size -->
-		<div id="app2" class="content">
-			<div class="table">
-				<div v-on:input="changeFader(fader)"
-					v-for="fader in specielchannels" class="item backgroundWhite">
-					<div class="fader">
-						<input v-model="fader.size" type="range" min="0" max="255"
-							value="0" class="slider" id="myRange"> <label
-							class="subtitleFader backgroundYellow">CH.
-							{{fader.channel}} </label> <label
-							class="subtitleFaderDevice backgroundYellow">
-							{{fader.device}} </label> <label class="subtitleFaderValue">
-							{{fader.size}}</label>
+	</fader>
 
-					</div>
-					<div class="muteButton backgroundBlack">
-						<span class="">Mute</span> <label class="switch"> <input
-							v-on:input="changeFader" type="checkbox" v-model="fader.mute">
-							<span class="slider round"></span>
-						</label>
-					</div>
+	<faderS> <!-- special fader / Speed and Size -->
+	<div id="app2" class="content">
+		<div class="table">
+			<div v-on:input="changeFader(fader)" v-for="fader in specielchannels"
+				class="item backgroundWhite">
+				<div class="fader">
+					<input v-model="fader.size" type="range" min="0" max="255"
+						value="0" class="slider" id="myRange"> <label
+						class="subtitleFader backgroundYellow">CH.
+						{{fader.channel}} </label> <label
+						class="subtitleFaderDevice backgroundYellow">
+						{{fader.device}} </label> <label class="subtitleFaderValue">
+						{{fader.size}}</label>
+
+				</div>
+				<div class="muteButton backgroundBlack">
+					<span class="">Mute</span> <label class="switch"> <input
+						v-on:input="changeFader" type="checkbox" v-model="fader.mute">
+						<span class="slider round"></span>
+					</label>
 				</div>
 			</div>
 		</div>
+	</div>
+	</faderS>
 
-		<!-- Effect Buttons -->
-		<div id="appButton">
-			<div class="table">
-				<div v-on:click="click(button)" v-for="button in buttons">
-					<div class="button">
-						<button>{{button.name}}</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
-
-		<!-- Device Buttons TODO vevry Ugly -->
-		<div id='example-3'>
-			<input v-on:change="changeDevices(0)" type="checkbox" id="Device0"
-				value="Device0" v-model="checkedNames"> <label for="Device0">Device0</label>
-			<input v-on:change="changeDevices(1)" type="checkbox" id="Device1"
-				value="Device1" v-model="checkedNames"> <label for="Device1">Device1</label>
-			<input v-on:change="changeDevices(2)" type="checkbox" id="Device2"
-				value="Device2" v-model="checkedNames"> <label for="Device2">Device2</label>
-			<input v-on:change="changeDevices(3)" type="checkbox" id="Device3"
-				value="Device3" v-model="checkedNames"> <label for="Device3">Device3</label>
-			<input v-on:change="changeDevices(4)" type="checkbox" id="Device4"
-				value="Device4" v-model="checkedNames"> <label for="Device4">Device4</label>
-			<input v-on:change="changeDevices(5)" type="checkbox" id="Device5"
-				value="Device5" v-model="checkedNames"> <label for="Device5">Device5</label>
-			<input v-on:change="changeDevices(6)" type="checkbox" id="Device6"
-				value="Device6" v-model="checkedNames"> <label for="Device6">Device6</label>
-			<input v-on:change="changeDevices(7)" type="checkbox" id="Device7"
-				value="Device7" v-model="checkedNames"> <label for="Device7">Device7</label>
-			<input v-on:change="changeDevices(8)" type="checkbox" id="Device8"
-				value="Device8" v-model="checkedNames"> <label for="Device8">Device8</label>
-
-			<input v-on:change="changeDevices(9)" type="checkbox" id="Device9"
-				value="Device9" v-model="checkedNames"> <label for="Device9">Device9</label>
-			<input v-on:change="changeDevices(10)" type="checkbox" id="Device10"
-				value="Device10" v-model="checkedNames"> <label
-				for="Device10">Device10</label> <input
-				v-on:change="changeDevices(11)" type="checkbox" id="Device11"
-				value="Device11" v-model="checkedNames"> <label
-				for="Device11">Device11</label> <input
-				v-on:change="changeDevices(12)" type="checkbox" id="Device12"
-				value="Device12" v-model="checkedNames"> <label
-				for="Device12">Device12</label> <br> <span>Checked
-				Devices: {{ checkedNames }}</span>
-		</div>
-
-		<!-- scene Buttons -->
-		<div id="sceneButtons">
-			<div class="table">
-				<div v-on:click="click(button)" v-for="button in buttons">
-					<div class="button">
-						<button>{{button.name}}</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- save button  -->
-		<div id="saveButton">
+	<effecte> <!-- Effect Buttons -->
+	<div id="appButton">
+		<div class="table">
 			<div v-on:click="click(button)" v-for="button in buttons">
 				<div class="button">
 					<button>{{button.name}}</button>
 				</div>
 			</div>
+		</div>
+	</div>
 
+	</effecte>
+
+
+	<devices> <!-- Device Buttons TODO vevry Ugly -->
+	<div id='example-3'>
+		<input v-on:change="changeDevices(0)" type="checkbox" id="Device0"
+			value="Device0" v-model="checkedNames"> <label for="Device0">Device0</label>
+		<input v-on:change="changeDevices(1)" type="checkbox" id="Device1"
+			value="Device1" v-model="checkedNames"> <label for="Device1">Device1</label>
+		<input v-on:change="changeDevices(2)" type="checkbox" id="Device2"
+			value="Device2" v-model="checkedNames"> <label for="Device2">Device2</label>
+		<input v-on:change="changeDevices(3)" type="checkbox" id="Device3"
+			value="Device3" v-model="checkedNames"> <label for="Device3">Device3</label>
+		<input v-on:change="changeDevices(4)" type="checkbox" id="Device4"
+			value="Device4" v-model="checkedNames"> <label for="Device4">Device4</label>
+		<input v-on:change="changeDevices(5)" type="checkbox" id="Device5"
+			value="Device5" v-model="checkedNames"> <label for="Device5">Device5</label>
+		<input v-on:change="changeDevices(6)" type="checkbox" id="Device6"
+			value="Device6" v-model="checkedNames"> <label for="Device6">Device6</label>
+		<input v-on:change="changeDevices(7)" type="checkbox" id="Device7"
+			value="Device7" v-model="checkedNames"> <label for="Device7">Device7</label>
+		<input v-on:change="changeDevices(8)" type="checkbox" id="Device8"
+			value="Device8" v-model="checkedNames"> <label for="Device8">Device8</label>
+
+		<input v-on:change="changeDevices(9)" type="checkbox" id="Device9"
+			value="Device9" v-model="checkedNames"> <label for="Device9">Device9</label>
+		<input v-on:change="changeDevices(10)" type="checkbox" id="Device10"
+			value="Device10" v-model="checkedNames"> <label
+			for="Device10">Device10</label> <input
+			v-on:change="changeDevices(11)" type="checkbox" id="Device11"
+			value="Device11" v-model="checkedNames"> <label
+			for="Device11">Device11</label> <input
+			v-on:change="changeDevices(12)" type="checkbox" id="Device12"
+			value="Device12" v-model="checkedNames"> <label
+			for="Device12">Device12</label> <br> <span>Checked
+			Devices: {{ checkedNames }}</span>
+	</div>
+	</devices>
+
+	<scenen> <!-- scene Buttons -->
+	<div id="sceneButtons">
+		<div class="table">
+			<div v-on:click="click(button)" v-for="button in buttons">
+				<div class="button">
+					<button>{{button.name}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- save button  -->
+	<div id="saveButton">
+		<div v-on:click="click(button)" v-for="button in buttons">
+			<div class="button">
+				<button>{{button.name}}</button>
+			</div>
 		</div>
 
-
 	</div>
+</scenen>
 	
 	
-	
-	<br>
-	<br>
-	<br>
-	
+	<footer>
+	@Andre @Timon
+	</footer>
+
+
+
+
+	<!-- 
 	<template id="template-context-menu-item">
   <li class="context-menu-item">
     <slot></slot>
   </li>
 </template>
-<!-- 
 
 <template id="template-context-menu">
   <ul id="context-menu">
@@ -194,30 +282,30 @@
 	
 	
 	 -->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
