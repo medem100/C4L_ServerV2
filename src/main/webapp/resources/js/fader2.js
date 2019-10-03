@@ -1,4 +1,4 @@
-//const axios = require('axios');
+//const axios = require('axios'); Test
 
 //var URL = "http://192.168.43.87:8080/c4l_server/rest/";
 var URL = "http://192.168.178.104:8080/c4l_server/rest/";
