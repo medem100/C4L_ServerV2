@@ -3,7 +3,7 @@ package c4l.server.main;
 import org.json.JSONArray;
 
 public class Effect {
-//	buttons:[
+//	buttons:[  
 //		        {'name': "Effect 0,0", 'id': '1'},
 //		        {'name': "Effect 0,1", 'id': '2'},
 //		        {'name': "Effect 1,0", 'id': '3'},
