@@ -30,17 +30,15 @@ body {
 	/*  font: 120% sans-serif; */
 	display: grid;
 	/* dreispaltige Darstellung */
-	grid-template-areas:
-	 "nav header header header" 
-	 "nav effecte fader devices"
-	"nav scenen faderS devices" 
-	"nav footer footer footer";
+	grid-template-areas: "nav header header header"
+		"nav effecte fader devices" "nav scenen faderS devices"
+		"nav footer footer footer";
 	grid-template-columns: 5em 1fr 4fr 1fr;
 }
 
 fader {
 	grid-area: fader;
-/**	margin-left: auto;
+	/**	margin-left: auto;
 	margin-right: auto;
 	width: 80%; **/
 }
@@ -63,28 +61,20 @@ header {
 
 scenen {
 	grid-area: scenen;
-	
 }
 
-nav{
+nav {
 	grid-area: nav;
 }
 
-
-
-footer{
+footer {
 	grid-area: footer;
-
 }
 /* zweispaltige Darstellung */
 @media all and (max-width: 50em) {
 	body {
-		grid-template-areas: 
-		"nav header header" 
-		"nav fader fader" 
-		"nav faderS scenen"
-		"nav effecte devices" 
-		"nav footer footer";
+		grid-template-areas: "nav header header" "nav fader fader"
+			"nav faderS scenen" "nav effecte devices" "nav footer footer";
 		grid-template-columns: 1fr 2fr 2fr;
 	}
 }
@@ -108,9 +98,8 @@ footer{
 	<header>
 	<h1>Debug Page</h1>
 	</header>
-	
-	<nav>
-	<%@ include file="resources/html/menu.html"%>
+
+	<nav> <%@ include file="resources/html/menu.html"%>
 	</nav>
 
 	<!-- DMX Channel Fader -->
@@ -212,7 +201,51 @@ footer{
 			for="Device11">Device11</label> <input
 			v-on:change="changeDevices(12)" type="checkbox" id="Device12"
 			value="Device12" v-model="checkedNames"> <label
-			for="Device12">Device12</label> <br> <span>Checked
+			for="Device12">Device12</label> <br> 
+			
+			
+		<input v-on:change="changeDevices(13)" type="checkbox" id="Device13"
+			value="Device13" v-model="checkedNames"> <label for="Device13">Device13</label>
+		<input v-on:change="changeDevices(14)" type="checkbox" id="Device14"
+			value="Device14" v-model="checkedNames"> <label for="Device14">Device14</label>
+		<input v-on:change="changeDevices(15)" type="checkbox" id="Device15"
+			value="Device15" v-model="checkedNames"> <label for="Device15">Device15</label>
+		<input v-on:change="changeDevices(16)" type="checkbox" id="Device16"
+			value="Device16" v-model="checkedNames"> <label for="Device16">Device16</label>
+		<input v-on:change="changeDevices(17)" type="checkbox" id="Device17"
+			value="Device17" v-model="checkedNames"> <label for="Device17">Device17</label>
+		<input v-on:change="changeDevices(18)" type="checkbox" id="Device18"
+			value="Device18" v-model="checkedNames"> <label for="Device18">Device18</label>
+		<input v-on:change="changeDevices(19)" type="checkbox" id="Device19"
+			value="Device19" v-model="checkedNames"> <label for="Device19">Device19</label>
+		<input v-on:change="changeDevices(20)" type="checkbox" id="Device20"
+			value="Device20" v-model="checkedNames"> <label for="Device20">Device20</label>
+		<input v-on:change="changeDevices(21)" type="checkbox" id="Device21"
+			value="Device21" v-model="checkedNames"> <label for="Device21">Device21</label>
+			
+			
+		<input v-on:change="changeDevices(22)" type="checkbox" id="Device22"
+			value="Device22" v-model="checkedNames"> <label for="Device22">Device22</label>
+		<input v-on:change="changeDevices(23)" type="checkbox" id="Device23"
+			value="Device23" v-model="checkedNames"> <label for="Device23">Device23</label>
+		<input v-on:change="changeDevices(24)" type="checkbox" id="Device24"
+			value="Device24" v-model="checkedNames"> <label for="Device24">Device24</label>
+		<input v-on:change="changeDevices(25)" type="checkbox" id="Device25"
+			value="Device25" v-model="checkedNames"> <label for="Device25">Device25</label>
+		<input v-on:change="changeDevices(26)" type="checkbox" id="Device26"
+			value="Device26" v-model="checkedNames"> <label for="Device26">Device26</label>
+		<input v-on:change="changeDevices(27)" type="checkbox" id="Device27"
+			value="Device27" v-model="checkedNames"> <label for="Device27">Device27</label>
+		<input v-on:change="changeDevices(28)" type="checkbox" id="Device28"
+			value="Device28" v-model="checkedNames"> <label for="Device28">Device28</label>
+		<input v-on:change="changeDevices(29)" type="checkbox" id="Device29"
+			value="Device29" v-model="checkedNames"> <label for="Device29">Device29</label>
+		<input v-on:change="changeDevices(30)" type="checkbox" id="Device30"
+			value="Device30" v-model="checkedNames"> <label for="Device30">Device30</label>
+			
+			
+			
+			<span>Checked
 			Devices: {{ checkedNames }}</span>
 	</div>
 	</devices>
@@ -237,12 +270,10 @@ footer{
 		</div>
 
 	</div>
-</scenen>
-	
-	
-	<footer>
-	@Andre @Timon
-	</footer>
+	</scenen>
+
+
+	<footer>  </footer>
 
 
 

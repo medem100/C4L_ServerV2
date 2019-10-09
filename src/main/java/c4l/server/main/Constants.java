@@ -60,6 +60,6 @@ public class Constants {
 	
 	
 	// Graffik Konstants
-	public final static String[] FADERNAMES = {"Red","Green","Blue","Dimmer","Strobo","Effect","Effect2","Effect3",};
+	public final static String[] FADERNAMES = {"Red","Green","Blue","Dimmer","Strobo","Effect","Effect2","Effect3","9","10","11","12","13","14","15","16"};
 	
 }

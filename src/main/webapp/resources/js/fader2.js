@@ -193,6 +193,8 @@ new Vue({
 
 // Scene Buttons
 
+//Scene Buttons
+
 var appButton = new Vue({
 	  el: '#sceneButtons',
 	  data: {
@@ -232,6 +234,49 @@ var appButton = new Vue({
 	  }
 	});
 
+
+
+
+
+
+
+
+new Vue({
+	  el: '#example-3',
+	  data: {
+		    checkedNames: []
+		  },
+		  mounted: function () {
+		        var self = this;
+		        $.ajax({
+		            url: URLGET +"devices",
+		            method: 'GET',
+		            success: function (data) {
+		                self.checkedNames = data;
+		            },
+		            error: function (error) {
+		                console.log(error);
+		            }
+		        });
+		    },
+	    methods:{
+	    	  changeDevices: function(id){
+	    		  axios.get(URLSET+"device"+"?device="+id)
+	  	  		.then(function (response) {
+	  	  		 // handle success
+	  	  	// alert(response);
+	  	  		})
+	  	  		.catch(function (error) {
+	  	  		 // handle error
+	  	  			alert(error);
+	  	  		})
+	  	  		.finally(function () {
+	  	  		 // always executed
+	  	  		});
+	    	  }
+	      }
+	});
+
 //save Button
 
 var appButton = new Vue({
@@ -259,6 +304,50 @@ var appButton = new Vue({
 	  }
 	});
 
+
+// Timon buttons
+
+//document.getElementById("startAddress").value
+
+/*
+
+new Vue({
+	  el: '#TButtons',
+	  data: {
+		    checkedNames: []
+		  },
+		  mounted: function () {
+		        var self = this;
+		        $.ajax({
+		            url: URLGET +"devices",
+		            method: 'GET',
+		            success: function (data) {
+		                self.checkedNames = data;
+		            },
+		            error: function (error) {
+		                console.log(error);
+		            }
+		        });
+		    },
+	    methods:{
+	    	  changeDevices: function(id){
+	    		  axios.get(URLSET+"device"+"?device="+id)
+	  	  		.then(function (response) {
+	  	  		 // handle success
+	  	  	// alert(response);
+	  	  		})
+	  	  		.catch(function (error) {
+	  	  		 // handle error
+	  	  			alert(error);
+	  	  		})
+	  	  		.finally(function () {
+	  	  		 // always executed
+	  	  		});
+	    	  }
+	      }
+	});
+
+*/
 
 /*
 
