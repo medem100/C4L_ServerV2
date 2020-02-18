@@ -33,5 +33,12 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/C4l_Applet"/>
+	<classpathentry kind="lib" path="/C4l_Applet/lib/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="/C4l_Applet/lib/json-20160810.jar"/>
+	<classpathentry kind="lib" path="/C4l_Applet/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/C4l_Applet/lib/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="/C4l_Applet/lib/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="/C4l_Applet/lib/slf4j-simple-1.7.25.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

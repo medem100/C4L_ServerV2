@@ -1,8 +1,11 @@
 package c4l.server.rest;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -103,18 +106,22 @@ public class GetValues {
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "get selected Devices")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "    ") }) // TODO Error Message
-	public static Response getDevices() {
+	public static Response getDevices(@QueryParam("setupid") int setupid) {
 //		logger.debug("get Values");
-		JSONArray selectedDevices = new JSONArray();
+		//JSONArray selectedDevices = new JSONArray();
 		try {
-			for(int i = 0 ; i <= Constants.ALL_DEVICES; i ++) {
-				if(Values.getDevice(i)) {
-					selectedDevices.put("Device"+i);
-				}
+			JSONArray selectDevices = new JSONArray();
+			List<String> names = Device.getNamesOfDevicesForSetUp(setupid);
+			for(int i = 0 ; i < Constants.DYNAMIC_DEVICES; i++) {
+				JSONObject Device = new JSONObject();
+				Device.put("name", names.get(i));
+				Device.put("id", i);
+				Device.put("active", Values.getDevice(i));
+				selectDevices.put(Device);
 			}
-		return Response.status(200).entity(selectedDevices.toString()).build();
+		return Response.status(200).entity(selectDevices.toString()).build();
 		}catch (Exception e) {
-//			logger.error("Fail to build Json of Values ", e);
+		System.out.println("Fail to build Json of Values "+ e);
 			return Response.serverError().build();
 		}
 	}

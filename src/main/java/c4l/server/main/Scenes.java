@@ -1,6 +1,14 @@
 package c4l.server.main;
 
+import java.util.HashMap;
+import java.util.Set;
+
 import org.json.JSONArray;
+
+import c4l.applet.db.DB;
+import net.minidev.json.JSONObject;
+
+
 
 public class Scenes {
 //	buttons:[
@@ -27,13 +35,31 @@ public class Scenes {
 			+ "{'name':'scene12','id':'12', 'description':'d12'} "
 			+ "]";
 	
+	private static DB db = c4l.applet.db.DB.getInstance();
+	private static int setupID = 1;
+	
+	
+	
 	public static JSONArray getScenes() {
-		return new JSONArray(scenes);
+		JSONArray scenesforsetup = new JSONArray();
+		
+		HashMap<Integer, String> scens = db.Select.sceneInfos(setupID);
+		 for(int key : scens.keySet()) {
+			JSONObject js = new JSONObject();
+			 js.put("id", key);
+			 js.put("name", scens.get(key));
+			 js.put("description", "not implementet ");
+			 scenesforsetup.put(js);
+			
+		 }
+		 return scenesforsetup;
 	}
 	
 	public static JSONArray getEffectButtonData() {
 		return new JSONArray(scenes);
 	}
+	
+	
 	
 	
 	

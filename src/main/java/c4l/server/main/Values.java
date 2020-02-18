@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import c4l.server.main.Constants;
 
 public class Values {
+	// TODO Putt in C4l applet
 
 	// private Logger logger = Logger.getRootLogger();
 	private static int effectSice = 0;
@@ -17,6 +18,7 @@ public class Values {
 	private static JSONArray faderValues = new JSONArray(new int[Constants.DEVICE_CHANNELS]);
 	private static JSONArray deviceSelected = new JSONArray(new Boolean[Constants.DYNAMIC_DEVICES]);
 	private static boolean savePresst = false;
+	private static boolean crateNewScenePresst = false;
 
 	// getter setter
 
@@ -27,6 +29,10 @@ public class Values {
 
 	public static boolean isSavePresst() {
 		return savePresst;
+	}
+	
+	public static boolean isCrateNewScenePresst() {
+		return crateNewScenePresst;
 	}
 
 	public static void setSavePresst(boolean savePresst) {
@@ -118,6 +124,10 @@ public class Values {
 		}
 
 	}
+	
+	public static void setCrateNewScenePresst(boolean b) {
+		crateNewScenePresst = b;
+	}
 
 	public static void setFader(int fader, int value) {
 		Values.faderValues.put(fader, value);
@@ -145,6 +155,7 @@ public class Values {
 //		answer.put("devices", deviceSelected);
 		answer.put("effect", effectID);
 		answer.put("save", savePresst);
+		answer.put("crateNewScene", crateNewScenePresst);
 
 		return answer.toString();
 	}

@@ -22,31 +22,35 @@
 	integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
 	crossorigin="anonymous"></script>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
 
 
 <style>
-/* Farbangaben und �hnliche rein optische Formatierungen weggelassen */
+/* Farbangaben und ähnliche rein optische Formatierungen weggelassen */
 body {
 	/*  font: 120% sans-serif; */
 	display: grid;
 	/* dreispaltige Darstellung */
-	grid-template-areas:
-	 "nav header header header" 
-	 "nav effecte fader devices"
-	"nav scenen faderS devices" 
-	"nav footer footer footer";
-	grid-template-columns: 5em 1fr 4fr 1fr;
+	grid-template-areas: "nav header header  header"
+		"nav effecte fader  devices" "nav scenen faderS  devices"
+		"nav footer footer  footer";
+	grid-template-columns: 5em 1fr 3fr 1fr;
 }
 
 fader {
 	grid-area: fader;
-/**	margin-left: auto;
+	/**	margin-left: auto;
 	margin-right: auto;
 	width: 80%; **/
 }
 
 effecte {
 	grid-area: effecte;
+	margin: 5px;
 }
 
 faderS {
@@ -63,28 +67,20 @@ header {
 
 scenen {
 	grid-area: scenen;
-	
 }
 
-nav{
+nav {
 	grid-area: nav;
 }
 
-
-
-footer{
+footer {
 	grid-area: footer;
-
 }
 /* zweispaltige Darstellung */
 @media all and (max-width: 50em) {
 	body {
-		grid-template-areas: 
-		"nav header header" 
-		"nav fader fader" 
-		"nav faderS scenen"
-		"nav effecte devices" 
-		"nav footer footer";
+		grid-template-areas: "nav header header" "nav fader fader"
+			"nav faderS scenen" "nav effecte devices" "nav footer footer";
 		grid-template-columns: 1fr 2fr 2fr;
 	}
 }
@@ -93,6 +89,151 @@ footer{
 	body {
 		display: block;
 	}
+}
+
+#appButton2 {
+	margin: 10px 10px 10px 10px;
+}
+
+button.button3 {
+	display: inline-block;
+	padding: 0.3em 1.2em;
+	margin: 0 0.3em 0.3em 0;
+	border-radius: 2em;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	color: #FFFFFF;
+	background-color: #4eb5f1;
+	text-align: center;
+	transition: all 0.2s;
+}
+
+button.button3:hover {
+	background-color: #4095c6;
+}
+
+@media all and (max-width:30em) {
+	button.button3 {
+		display: block;
+		margin: 0.4em auto;
+		 
+	}
+}
+
+button.button4 {
+	display: inline-block;
+	padding: 0.3em 1.2em;
+	margin: 0 0.3em 0.3em 0;
+	border-radius: 2em;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	color: #FFFFFF;
+	background-color: #199c93;
+	text-align: center;
+	transition: all 0.2s;
+}
+
+button.button4:hover {
+	background-color: #4095c6;
+}
+
+@media all and (max-width:30em) {
+	button.button4 {
+		display: block;
+		margin: 0.4em auto;
+		 
+	}
+}
+
+/************************************************************/
+/*context menu*/
+* {
+	box-sizing: border-box;
+}
+
+.modal-mask {
+	position: fixed;
+	z-index: 9998;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .5);
+	transition: opacity .3s ease;
+}
+
+.modal-container {
+	width: 300px;
+	margin: 40px auto 0;
+	padding: 20px 30px;
+	background-color: #fff;
+	border-radius: 2px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+	transition: all .3s ease;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+	margin-top: 0;
+	color: #42b983;
+}
+
+.modal-body {
+	margin: 20px 0;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.form-label {
+	display: block;
+	margin-bottom: 1em;
+}
+
+.form-label>.form-control {
+	margin-top: 0.5em;
+}
+
+.form-control {
+	display: block;
+	width: 100%;
+	padding: 0.5em 1em;
+	line-height: 1.5;
+	border: 1px solid #ddd;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+.modal-enter {
+	opacity: 0;
+}
+
+.modal-leave-active {
+	opacity: 0;
+}
+
+.modal-enter .modal-container, .modal-leave-active .modal-container {
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+.greenBtn {
+	background-color: green
+}
+
+.blackBtn {
+	background-color: black
 }
 </style>
 
@@ -108,13 +249,12 @@ footer{
 	<header>
 	<h1>Debug Page</h1>
 	</header>
-	
-	<nav>
-	<%@ include file="resources/html/menu.html"%>
+
+	<nav> <%@ include file="resources/html/menu.html"%>
 	</nav>
 
 	<!-- DMX Channel Fader -->
-	<fader>
+	<main role="main" class="container"> <fader>
 	<div id="app" class="content">
 		<div class="table">
 			<div v-on:input="changeFader(fader)" v-for="fader in channels"
@@ -139,7 +279,7 @@ footer{
 		</div>
 	</div>
 
-	</fader>
+	</fader> </main>
 
 	<faderS> <!-- special fader / Speed and Size -->
 	<div id="app2" class="content">
@@ -172,7 +312,7 @@ footer{
 		<div class="table">
 			<div v-on:click="click(button)" v-for="button in buttons">
 				<div class="button">
-					<button>{{button.name}}</button>
+					<button class="button3">{{button.name}}</button>
 				</div>
 			</div>
 		</div>
@@ -181,39 +321,12 @@ footer{
 	</effecte>
 
 
-	<devices> <!-- Device Buttons TODO vevry Ugly -->
-	<div id='example-3'>
-		<input v-on:change="changeDevices(0)" type="checkbox" id="Device0"
-			value="Device0" v-model="checkedNames"> <label for="Device0">Device0</label>
-		<input v-on:change="changeDevices(1)" type="checkbox" id="Device1"
-			value="Device1" v-model="checkedNames"> <label for="Device1">Device1</label>
-		<input v-on:change="changeDevices(2)" type="checkbox" id="Device2"
-			value="Device2" v-model="checkedNames"> <label for="Device2">Device2</label>
-		<input v-on:change="changeDevices(3)" type="checkbox" id="Device3"
-			value="Device3" v-model="checkedNames"> <label for="Device3">Device3</label>
-		<input v-on:change="changeDevices(4)" type="checkbox" id="Device4"
-			value="Device4" v-model="checkedNames"> <label for="Device4">Device4</label>
-		<input v-on:change="changeDevices(5)" type="checkbox" id="Device5"
-			value="Device5" v-model="checkedNames"> <label for="Device5">Device5</label>
-		<input v-on:change="changeDevices(6)" type="checkbox" id="Device6"
-			value="Device6" v-model="checkedNames"> <label for="Device6">Device6</label>
-		<input v-on:change="changeDevices(7)" type="checkbox" id="Device7"
-			value="Device7" v-model="checkedNames"> <label for="Device7">Device7</label>
-		<input v-on:change="changeDevices(8)" type="checkbox" id="Device8"
-			value="Device8" v-model="checkedNames"> <label for="Device8">Device8</label>
-
-		<input v-on:change="changeDevices(9)" type="checkbox" id="Device9"
-			value="Device9" v-model="checkedNames"> <label for="Device9">Device9</label>
-		<input v-on:change="changeDevices(10)" type="checkbox" id="Device10"
-			value="Device10" v-model="checkedNames"> <label
-			for="Device10">Device10</label> <input
-			v-on:change="changeDevices(11)" type="checkbox" id="Device11"
-			value="Device11" v-model="checkedNames"> <label
-			for="Device11">Device11</label> <input
-			v-on:change="changeDevices(12)" type="checkbox" id="Device12"
-			value="Device12" v-model="checkedNames"> <label
-			for="Device12">Device12</label> <br> <span>Checked
-			Devices: {{ checkedNames }}</span>
+	<div id="selectdevices">
+		<device-button v-for="device in devices" 
+		v-bind:deviceid="device.id"
+		v-bind:name="device.name"
+		v-bind:select="device.active">
+		</device-button>
 	</div>
 	</devices>
 
@@ -221,8 +334,8 @@ footer{
 	<div id="sceneButtons">
 		<div class="table">
 			<div v-on:click="click(button)" v-for="button in buttons">
-				<div class="button">
-					<button>{{button.name}}</button>
+				<div @contextmenu="handler($event,button)" class="button">
+					<button class="button4">{{button.name}} ({{button.id}})</button>
 				</div>
 			</div>
 		</div>
@@ -237,12 +350,63 @@ footer{
 		</div>
 
 	</div>
-</scenen>
-	
-	
-	<footer>
-	@Andre @Timon
-	</footer>
+
+	<div id="crateSceneButton">
+		<div v-on:click="click(button)" v-for="button in buttons">
+			<div class="button">
+				<button>{{button.name}}</button>
+			</div>
+		</div>
+
+	</div>
+	<br>
+	<br>
+	<label for="scenenID">SCENEN ID:</label> <input id="sceneID">
+	<br>
+	<label for="scenenID">new name:</label> <input id="newSceneName">
+	<br>
+	<button id="renameScene">rename</button>
+	</scenen>
+
+	<config> </config>
+
+
+	<footer> @Andre </footer>
+
+	<!-- template for the modal component -->
+	<script type="x/template" id="modal-template">
+    <transition name="modal">
+        <div class="modal-mask" v-show="show">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3>New Post</h3>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">
+                        Title
+                        <input class="form-control">
+                    </label>
+                    <label class="form-label">
+                        Body
+                        <textarea rows="5" class="form-control"></textarea>
+                    </label>
+                </div>
+                <div class="modal-footer text-right">
+                    <button class="modal-default-button" @click="savePost()">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </transition>
+</script>
+
+
+	<!-- app -->
+	<div id="app3">
+		<modal :show="showModal" @close="showModal = false"></modal>
+		<button id="show-modal" @click="showModal = true">New Post</button>
+	</div>
 
 
 
@@ -283,26 +447,17 @@ footer{
 	
 	 -->
 
+	<!-- jQuery library -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+	<!-- Popper JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<!-- Latest compiled JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
 

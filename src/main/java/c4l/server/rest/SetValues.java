@@ -9,6 +9,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import c4l.applet.db.DB;
 import c4l.server.main.Values;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +19,7 @@ import io.swagger.annotations.ApiResponses;
 @Path("/set")
 @Api(value = "/set")
 public class SetValues {
+	private static DB db = c4l.applet.db.DB.getInstance();
 
 	// private static Logger logger = Logger.getLogger(getValues.class);
 	@GET
@@ -150,6 +152,38 @@ public class SetValues {
 		// logger.debug("get Values");
 		try {
 			Values.setSavePresst(save);
+			return Response.status(200).build();
+		} catch (Exception e) {
+			// logger.error("Fail to build Json of Values ", e);
+			return Response.serverError().build();
+		}
+	}
+	
+	@GET
+	@Path("/setCrateNewScene")
+//	@Consumes(MediaType.TEXT_PLAIN)
+	@ApiOperation(value = "set crate scene")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "    ") }) // TODO Error Message
+	public static Response setCrateNewScenePresst(@QueryParam("save") boolean save) {
+		// logger.debug("get Values");
+		try {
+			Values.setCrateNewScenePresst(save);
+			return Response.status(200).build();
+		} catch (Exception e) {
+			// logger.error("Fail to build Json of Values ", e);
+			return Response.serverError().build();
+		}
+	}
+	
+	@GET
+	@Path("/renameScene")
+//	@Consumes(MediaType.TEXT_PLAIN)
+	@ApiOperation(value = "renameScene")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "    ") }) // TODO Error Message
+	public static Response setSceneName(@QueryParam("scene") int scenenid, @QueryParam("name") String name) {
+		// logger.debug("get Values");
+		try {
+			db.Update.scenenName(scenenid, name);
 			return Response.status(200).build();
 		} catch (Exception e) {
 			// logger.error("Fail to build Json of Values ", e);
