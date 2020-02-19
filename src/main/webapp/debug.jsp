@@ -332,17 +332,7 @@ button.button4:hover {
 	</devices>
 
 	<scenen> <!-- scene Buttons -->
-	<div id="sceneButtons">
-		<div class="table">
-			<div v-on:click="click(button)" v-for="button in buttons">
-				<div @contextmenu="handler($event,button)" class="button">
-					<button class="button4">{{button.name}} ({{button.id}})</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
+		
 		<div id="selectscene">
 		<scene-button v-for="scene in scenes" 
 		v-bind:sceneid="scene.id"
@@ -359,7 +349,7 @@ button.button4:hover {
 	<div id="saveButton">
 		<div v-on:click="click(button)" v-for="button in buttons">
 			<div class="button">
-				<button>{{button.name}}</button>
+				<button class="btn btn-secondary">{{button.name}}</button>
 			</div>
 		</div>
 
@@ -368,18 +358,14 @@ button.button4:hover {
 	<div id="crateSceneButton">
 		<div v-on:click="click(button)" v-for="button in buttons">
 			<div class="button">
-				<button>{{button.name}}</button>
+				<button class="btn btn-secondary" >{{button.name}}</button>
 			</div>
 		</div>
 
 	</div>
 	<br>
 	<br>
-	<label for="scenenID">SCENEN ID:</label> <input id="sceneID">
-	<br>
-	<label for="scenenID">new name:</label> <input id="newSceneName">
-	<br>
-	<button id="renameScene">rename</button>
+
 	</scenen>
 
 	<config> </config>
@@ -397,7 +383,7 @@ button.button4:hover {
                 </div>
                 <div class="modal-body">
                     <label class="form-label">
-                        name
+                      
                         <input type="text" class="form-control" @input="handleInputNewName($event.target.value)">
                     </label>
 					<button type="button" @click="renameScene" class="btn btn-warning">Rename</button>

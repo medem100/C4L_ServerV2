@@ -9,6 +9,7 @@ var URL = "http://localhost:8080/c4l_server/rest/";
 
 var URLSET = URL+"set/";
 var URLGET = URL+"get/";
+var URLDELETE = URL+"delete/"
 
 
 
@@ -28,19 +29,24 @@ Vue.component('modal', {
 			this.newName = value;  
 		  }, 
 		  deleteScene: function () {
-	      // Some save logic goes here...
-	    	alert("deletScenen "+ this.$props.sceneID);
-	      // TODO Save will you delete ????
+	    //	alert("deletScenen "+ this.$props.sceneID);
+	      
+	    	axios.get(URLDELETE+"scene"+"?scene="+this.$props.sceneID)
+  	  		.then(function (response) {
+  	  			location.reload(true);
+  	  		})
+  	  		.catch(function (error) {
+  	  		      alert(error);
+  	  		});
+	    	
+	    	
 	      this.$emit('close');
 	    },
 	    closeSettings : function (){
 	    	this.$emit('close');
 	    },
 	    renameScene : function (){
-	    // alert("rename Scene " + this.newName + " " + this.$props.sceneID);
-	    // call = URLSET + "renameScene"+"?scene="+$( "#sceneID"
-		// ).val()+"&name="+$( "#newSceneName" ).val();
-	    	axios.get(URLSET+"renameScene"+"?scene="+this.$props.sceneID+"&name="+this.newName)
+	     	axios.get(URLSET+"renameScene"+"?scene="+this.$props.sceneID+"&name="+this.newName)
   	  		.then(function (response) {
   	  		location.reload(true);
   	  		})

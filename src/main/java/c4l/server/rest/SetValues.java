@@ -78,6 +78,9 @@ public class SetValues {
 		}
 	}
 	
+	
+	
+	
 	@GET
 	@Path("/scene")
 	@Consumes(MediaType.TEXT_PLAIN)
