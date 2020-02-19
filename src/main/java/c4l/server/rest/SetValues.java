@@ -193,5 +193,21 @@ public class SetValues {
 			return Response.serverError().build();
 		}
 	}
+	
+	@GET
+	@Path("/toogleChannelSelect")
+//	@Consumes(MediaType.TEXT_PLAIN)
+	@ApiOperation(value = "toogle is channel select")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "    ") }) // TODO Error Message
+	public static Response setCrateNewScenePresst(@QueryParam("channel") int channel) {
+		// logger.debug("get Values");
+		try {
+			Values.toogleChannelSelect(channel);
+			return Response.status(200).build();
+		} catch (Exception e) {
+			// logger.error("Fail to build Json of Values ", e);
+			return Response.serverError().build();
+		}
+	}
 
 }

@@ -157,5 +157,30 @@ public class GetValues {
 		}
 	}
 	
+	@GET
+	@Path("/selectedChannels")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "get values for the scene buttons")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "    ") }) // TODO Error Message
+	public static Response getSelectedChannels() {
+//		logger.debug("get Values");
+		try {
+			JSONArray selectedChannels = new JSONArray();
+			//List<String> names = Device.getNamesOfDevicesForSetUp(setupid);
+			boolean[] channelsStatus = Values.getChannelSelected();
+			for(int i = 0 ; i < channelsStatus.length; i++) {
+				JSONObject channel = new JSONObject();
+				channel.put("id", i);
+				channel.put("select", channelsStatus[i]);
+				selectedChannels.put(channel);
+			}
+			
+		return Response.status(200).entity(selectedChannels.toString()).build();
+		}catch (Exception e) {
+//			logger.error("Fail to build Json of Values ", e);
+			return Response.serverError().build();
+		}
+	}
+	
 
 }

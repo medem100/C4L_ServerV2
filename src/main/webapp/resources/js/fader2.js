@@ -153,6 +153,49 @@ Vue.component("device-button",{
 
 
 
+Vue.component("channel-button",{
+	template : '<button class="button3" :style="buttonStyles" @click="selectchannel()" >{{ id }}</button>',
+
+	data(){
+	    return {
+	    isActive : this.$props.select,
+	  }
+	},
+	
+	props: {
+		id : Number,
+		select : Boolean
+	},
+	
+	computed : {
+	    buttonStyles(){
+	    return {
+	        backgroundColor : this.isActive  ? 'green' : '',
+	    }
+	  }
+	},
+	
+	methods : {
+	    selectchannel(){
+	       	
+	    this.isActive = !this.isActive;
+	    
+   		  axios.get(URLSET+"toogleChannelSelect"+"?channel="+this.$props.deviceid)
+  	  		.then(function (response) {
+  	  		 // handle success
+  	  		})
+  	  		.catch(function (error) {
+  	  		 // handle error
+  	  			alert(error);
+  	  		});
+	    
+	    }
+	}
+});
+
+
+
+
 new Vue({
 	  el: '#app3',
 	  data: {
@@ -187,6 +230,30 @@ new Vue({
             method: 'GET',
             success: function (data) {
                 self.devices = data;
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    },
+})
+
+
+new Vue({
+	el: '#selectchannels',
+	data: {
+		channels: [
+// { id: 1, name: 'Device 1', activ :false },
+// { id: 2, name: 'Device 2', activ :true },
+// { id: 3, name: 'Device 3', activ :false }
+	    ]
+	},mounted: function () {
+        var self = this;
+        $.ajax({
+            url: URLGET +"selectedChannels",
+            method: 'GET',
+            success: function (data) {
+                self.channels = data;
             },
             error: function (error) {
                 console.log(error);

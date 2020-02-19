@@ -17,11 +17,15 @@ public class Values {
 	private static String effectID = "99"; // Initzalisirt das kein button gedrückt ist
 	private static JSONArray faderValues = new JSONArray(new int[Constants.DEVICE_CHANNELS]);
 	private static JSONArray deviceSelected = new JSONArray(new Boolean[Constants.DYNAMIC_DEVICES]);
+	private static boolean[] channelSelected = new boolean[Constants.DEVICE_CHANNELS];
 	private static boolean savePresst = false;
 	private static boolean crateNewScenePresst = false;
-
 	// getter setter
 
+	
+	public static boolean[] getChannelSelected() {
+		return channelSelected;
+	}
 	
 	public static int getEffectSice() {
 		return effectSice;
@@ -33,6 +37,10 @@ public class Values {
 	
 	public static boolean isCrateNewScenePresst() {
 		return crateNewScenePresst;
+	}
+	
+	public static void toogleChannelSelect(int channel) {
+		channelSelected[channel] = !channelSelected[channel];
 	}
 
 	public static void setSavePresst(boolean savePresst) {
@@ -153,6 +161,7 @@ public class Values {
 		answer.put("fader", faderValues);
 		answer.put("devices", deviceSelected);
 //		answer.put("devices", deviceSelected);
+		answer.put("selectChannels", new JSONArray(channelSelected));
 		answer.put("effect", effectID);
 		answer.put("save", savePresst);
 		answer.put("crateNewScene", crateNewScenePresst);

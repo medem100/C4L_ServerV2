@@ -9,7 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- Icons -->
-<script src="https://kit.fontawesome.com/8316d3d12e.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/8316d3d12e.js"
+	crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="resources/css/fader2.css">
 <!--  
@@ -55,6 +56,7 @@ effecte {
 }
 
 faderS {
+	float: left;
 	grid-area: faderS;
 }
 
@@ -306,6 +308,16 @@ button.button4:hover {
 			</div>
 		</div>
 	</div>
+
+
+	<div id="selectchannels">
+		<channel-button v-for="channel in channels" v-bind:id="channel.id"
+			v-bind:select="channel.select"> </channel-button>
+	</div>
+
+
+
+
 	</faderS>
 
 	<effecte> <!-- Effect Buttons -->
@@ -323,27 +335,21 @@ button.button4:hover {
 
 
 	<div id="selectdevices">
-		<device-button v-for="device in devices" 
-		v-bind:deviceid="device.id"
-		v-bind:name="device.name"
-		v-bind:select="device.active">
+		<device-button v-for="device in devices" v-bind:deviceid="device.id"
+			v-bind:name="device.name" v-bind:select="device.active">
 		</device-button>
 	</div>
 	</devices>
 
 	<scenen> <!-- scene Buttons -->
-		
-		<div id="selectscene">
-		<scene-button v-for="scene in scenes" 
-		v-bind:sceneid="scene.id"
-		v-bind:name="scene.name"
-		v-bind:select="scene.active"
-		v-bind:showModal="scene.showModal" >
-		
-		</scene-button>
+
+	<div id="selectscene">
+		<scene-button v-for="scene in scenes" v-bind:sceneid="scene.id"
+			v-bind:name="scene.name" v-bind:select="scene.active"
+			v-bind:showModal="scene.showModal"> </scene-button>
 	</div>
-	
-	
+
+
 
 	<!-- save button  -->
 	<div id="saveButton">
@@ -358,7 +364,7 @@ button.button4:hover {
 	<div id="crateSceneButton">
 		<div v-on:click="click(button)" v-for="button in buttons">
 			<div class="button">
-				<button class="btn btn-secondary" >{{button.name}}</button>
+				<button class="btn btn-secondary">{{button.name}}</button>
 			</div>
 		</div>
 
@@ -405,15 +411,15 @@ button.button4:hover {
 		<modal v-bind:show="showModal" @close="showModal = false"></modal>
 		<button id="show-modal" @click="showModal = true">New Post</button>
 	</div>
-	
-	
-		<!-- app -->
+
+
+	<!-- app -->
 	<div id="testSettings">
 		<modal v-bind:show="showModal" @close="showModal = false"></modal>
 		<button id="show-modal" @click="showModal = true">New Post</button>
 	</div>
-	
-	
+
+
 
 
 
