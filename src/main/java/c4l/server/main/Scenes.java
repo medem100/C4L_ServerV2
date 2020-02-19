@@ -49,6 +49,7 @@ public class Scenes {
 			 js.put("id", key);
 			 js.put("name", scens.get(key));
 			 js.put("description", "not implementet ");
+			 js.put("showModal", false);
 			 scenesforsetup.put(js);
 			
 		 }

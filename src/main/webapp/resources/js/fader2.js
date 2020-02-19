@@ -3,10 +3,102 @@
 //var URL = "http://192.168.43.17:8080/c4l_server/rest/";
 //var URL = "http://192.168.178.104:8080/c4l_server/rest/";
 //var URL = "http://192.168.56.1:8080/c4l_server/rest/";
+
+
 var URL = "http://localhost:8080/c4l_server/rest/";
 
 var URLSET = URL+"set/";
-var URLGET = URL+"get/"
+var URLGET = URL+"get/";
+
+
+
+Vue.component('modal', {
+	  template: '#modal-template',
+	  
+	  data(){
+		    return {
+		    newName : "",
+		  }
+		},
+	  
+	  props: ['show', 'value' ,'sceneID' ],
+	  
+	  methods: {
+		  handleInputNewName : function(value){
+			this.newName = value;  
+		  }, 
+		  deleteScene: function () {
+	      // Some save logic goes here...
+	    	alert("deletScenen "+ this.$props.sceneID);
+	      // TODO Save will you delete ????
+	      this.$emit('close');
+	    },
+	    closeSettings : function (){
+	    	this.$emit('close');
+	    },
+	    renameScene : function (){
+	    // alert("rename Scene " + this.newName + " " + this.$props.sceneID);
+	    // call = URLSET + "renameScene"+"?scene="+$( "#sceneID"
+		// ).val()+"&name="+$( "#newSceneName" ).val();
+	    	axios.get(URLSET+"renameScene"+"?scene="+this.$props.sceneID+"&name="+this.newName)
+  	  		.then(function (response) {
+  	  		location.reload(true);
+  	  		})
+  	  		.catch(function (error) {
+  	  		 // handle error
+  	  			alert(error);
+  	  		});
+	    	
+	    	
+	    }
+	  }
+	});
+
+
+
+
+	
+	
+
+
+Vue.component("scene-button", {
+	template : '<div> <button class="button4" @click="activescene" >{{ name }}</button> <modal v-bind:sceneID="sceneid" v-bind:show="showModal" @close="showModal = false"> </modal> <button class="button4"  id="show-modal" @click="showModal = true"> <i class="fas fa-cog"></i></button> </div>',
+	
+	data(){
+	    return {
+	    isActive : this.$props.select,
+	  }
+	},
+	
+	props: {
+		name : String, 
+		sceneid : Number,
+		select : Boolean,
+		showModal : Boolean,
+	},
+	
+	methods : {
+	    activescene(){
+
+	    	this.isActive = !this.isActive;
+	    
+   		  axios.get(URLSET+"scene"+"?scene="+this.$props.deviceid)
+  	  		.then(function (response) {
+  	  		 // handle success
+  	  		})
+  	  		.catch(function (error) {
+  	  		 // handle error
+  	  			alert(error);
+  	  		})
+  	  		.finally(function () {
+  	  		 // always executed
+  	  		});
+	    
+	  }
+	 		}
+	
+})
+
 
 
 Vue.component("device-button",{
@@ -53,13 +145,34 @@ Vue.component("device-button",{
     	 		}
 });
 
+
+
+new Vue({
+	  el: '#app3',
+	  data: {
+		  
+		  sceneSettings: [
+			 { id: 1},
+			 { id: 2},
+			 { id: 3}
+				    ],
+	    showModal: false
+	  }
+	});
+
+
+
+
+
+
+
 new Vue({
 	el: '#selectdevices',
 	data: {
 	    devices: [
-//	      { id: 1, name: 'Device 1', activ :false },
-//	      { id: 2, name: 'Device 2', activ :true },
-//	      { id: 3, name: 'Device 3', activ :false }
+// { id: 1, name: 'Device 1', activ :false },
+// { id: 2, name: 'Device 2', activ :true },
+// { id: 3, name: 'Device 3', activ :false }
 	    ]
 	},mounted: function () {
         var self = this;
@@ -76,6 +189,29 @@ new Vue({
     },
 })
 
+
+new Vue({
+	el: '#selectscene',
+	data:  {
+		scenes: [
+// { id: 1, name: 'scene 1', active :false ,showModal: false},
+// { id: 2, name: 'scene 2', active :true , showModal: false},
+// { id: 3, name: 'scene 3', active :false ,showModal: false }
+	    ]}
+	,mounted: function () {
+        var self = this;
+        $.ajax({
+            url: URLGET +"sceneButtons",
+            method: 'GET',
+            success: function (data) {
+                self.scenes = data;
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    },
+})
 
 
 
@@ -165,10 +301,8 @@ var app2 = new Vue({
   	  		.catch(function (error) {
   	  		 // handle error
   	  			alert(error);
-  	  		})
-  	  		.finally(function () {
-  	  		 // always executed
   	  		});
+  	  		
   			
   		}else if (fader.channel == 2){
   			axios.get(URLSET+"speed"+"?speed="+fader.size)
@@ -179,10 +313,8 @@ var app2 = new Vue({
   	  		.catch(function (error) {
   	  		 // handle error
   	  			alert(error);
-  	  		})
-  	  		.finally(function () {
-  	  		 // always executed
   	  		});
+  	  		
   		}  		
   	  }
     }
@@ -230,42 +362,14 @@ var appButton = new Vue({
 
 
 /*
-new Vue({
-	  el: '#example-3',
-	  data: {
-		    checkedNames: []
-		  },
-		  mounted: function () {
-		        var self = this;
-		        $.ajax({
-		            url: URLGET +"devices",
-		            method: 'GET',
-		            success: function (data) {
-		                self.checkedNames = data;
-		            },
-		            error: function (error) {
-		                console.log(error);
-		            }
-		        });
-		    },
-	    methods:{
-	    	  changeDevices: function(id){
-	    		  axios.get(URLSET+"device"+"?device="+id)
-	  	  		.then(function (response) {
-	  	  		 // handle success
-	  	  	// alert(response);
-	  	  		})
-	  	  		.catch(function (error) {
-	  	  		 // handle error
-	  	  			alert(error);
-	  	  		})
-	  	  		.finally(function () {
-	  	  		 // always executed
-	  	  		});
-	    	  }
-	      }
-	});
-	*/
+ * new Vue({ el: '#example-3', data: { checkedNames: [] }, mounted: function () {
+ * var self = this; $.ajax({ url: URLGET +"devices", method: 'GET', success:
+ * function (data) { self.checkedNames = data; }, error: function (error) {
+ * console.log(error); } }); }, methods:{ changeDevices: function(id){
+ * axios.get(URLSET+"device"+"?device="+id) .then(function (response) { //
+ * handle success // alert(response); }) .catch(function (error) { // handle
+ * error alert(error); }) .finally(function () { // always executed }); } } });
+ */
 
 // Scene Buttons
 
@@ -368,28 +472,6 @@ var appButton = new Vue({
 	});
 
 
-
-Vue.component('modal', {
-	  template: '#modal-template',
-	  props: ['show'],
-	  methods: {
-	    savePost: function () {
-	      // Some save logic goes here...
-	    	alert("test");
-	      
-	      this.$emit('close');
-	    }
-	  }
-	});
-
-	new Vue({
-	  el: '#app3',
-	  data: {
-	    showModal: false
-	  }
-	});
-	
-	
 	
 $( "#renameScene" ).click(function() {
 	

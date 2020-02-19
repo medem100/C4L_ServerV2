@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+<!-- Icons -->
+<script src="https://kit.fontawesome.com/8316d3d12e.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="resources/css/fader2.css">
 <!--  
@@ -340,6 +341,19 @@ button.button4:hover {
 			</div>
 		</div>
 	</div>
+	
+	
+		<div id="selectscene">
+		<scene-button v-for="scene in scenes" 
+		v-bind:sceneid="scene.id"
+		v-bind:name="scene.name"
+		v-bind:select="scene.active"
+		v-bind:showModal="scene.showModal" >
+		
+		</scene-button>
+	</div>
+	
+	
 
 	<!-- save button  -->
 	<div id="saveButton">
@@ -379,21 +393,19 @@ button.button4:hover {
         <div class="modal-mask" v-show="show">
             <div class="modal-container">
                 <div class="modal-header">
-                    <h3>New Post</h3>
+                    <h3>Scene Settings</h3>
                 </div>
                 <div class="modal-body">
                     <label class="form-label">
-                        Title
-                        <input class="form-control">
+                        name
+                        <input type="text" class="form-control" @input="handleInputNewName($event.target.value)">
                     </label>
-                    <label class="form-label">
-                        Body
-                        <textarea rows="5" class="form-control"></textarea>
-                    </label>
+					<button type="button" @click="renameScene" class="btn btn-warning">Rename</button>
+                    
                 </div>
                 <div class="modal-footer text-right">
-                    <button class="modal-default-button" @click="savePost()">
-                        Save
+                   <button type="button" class="btn btn-danger" @click="deleteScene()">Delete</button> <button class="btn btn-secondary" @click="closeSettings()">
+                        close
                     </button>
                 </div>
             </div>
@@ -404,9 +416,18 @@ button.button4:hover {
 
 	<!-- app -->
 	<div id="app3">
-		<modal :show="showModal" @close="showModal = false"></modal>
+		<modal v-bind:show="showModal" @close="showModal = false"></modal>
 		<button id="show-modal" @click="showModal = true">New Post</button>
 	</div>
+	
+	
+		<!-- app -->
+	<div id="testSettings">
+		<modal v-bind:show="showModal" @close="showModal = false"></modal>
+		<button id="show-modal" @click="showModal = true">New Post</button>
+	</div>
+	
+	
 
 
 
