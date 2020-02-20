@@ -10,7 +10,7 @@ var URL = "http://localhost:8080/c4l_server/rest/";
 var URLSET = URL+"set/";
 var URLGET = URL+"get/";
 var URLDELETE = URL+"delete/"
-
+var URLCREATE = URL+"create/"
 
 
 Vue.component('modal', {
@@ -29,7 +29,7 @@ Vue.component('modal', {
 			this.newName = value;  
 		  }, 
 		  deleteScene: function () {
-	    //	alert("deletScenen "+ this.$props.sceneID);
+	    // alert("deletScenen "+ this.$props.sceneID);
 	      
 	    	axios.get(URLDELETE+"scene"+"?scene="+this.$props.sceneID)
   	  		.then(function (response) {
@@ -60,6 +60,113 @@ Vue.component('modal', {
 	  }
 	});
 
+Vue.component('create-case', {
+	template: '#create-new-case-template',
+	
+	data(){
+		return {
+			name:"",
+			sceneids:"",
+		}
+	},
+	props: ['show'],
+	methods: {
+		 handleInputName : function(value){
+			this.name = value;  
+		 }, 
+		  handleInputOrderScene: function(value){
+			this.sceneids = value;
+		  },
+		
+		
+		closeSettings: function(){
+			this.$emit('close');
+		},
+		createCase : function(){
+			alert("new case : " + this.name + " " + this.sceneids);
+			axios.get(URLCREATE+"chase"+"?sceneids="+this.sceneids+"&name="+this.name+"&setup=1"+"&description=''")
+  	  		.then(function (response) {
+  	  		location.reload(true);
+  	  		})
+  	  		.catch(function (error) {
+  	  		 // handle error
+  	  			alert(error);
+  	  		});
+			
+		}
+	}
+})
+
+
+
+
+Vue.component('case-settings', {
+	  template: '#case-settings-template',
+	  
+	  data(){
+		    return {
+		    newName : "",
+		    newSceneOrder: this.$props.scenenids
+		  }
+		},
+	  
+	  props: ['show', 'value' ,'caseID' , 'scenenids' , 'name'],
+	  
+	  methods: {
+		  handleInputNewName : function(value){
+			this.newName = value;  
+		  }, 
+		  handleInputReorderScene: function(value){
+			  this.newSceneOrder = value;
+		  },
+		  deleteCase: function () {
+	    	//alert("deletCase "+ this.$props.caseID);
+	      
+	    		axios.get(URLDELETE+"chase"+"?chase="+this.$props.caseID + "&setup=1")
+	    		.then(function (response) {
+	    			location.reload(true);
+	    		})
+	    		.catch(function (error) {
+	    			alert(error);
+	    		});
+	    	
+	    	
+	      this.$emit('close');
+	    },
+	    closeSettings : function (){
+	    	this.$emit('close');
+	    },
+	    renameCase : function (){
+//	    	alert("chase " + this.$props.caseID + " " + this.newName)
+			 axios.get(URLSET+"chasename"+"?chase="+this.$props.caseID+"&name="+this.newName)
+			 .then(function (response) {
+			 location.reload(true);
+			 })
+			 .catch(function (error) {
+			 // handle error
+			 alert(error);
+			 });
+	    	
+	    	
+	    },
+	    
+	    reorderScene: function (){
+	///    	alert("chase " + this.$props.caseID + " " + this.newSceneOrder)
+			 axios.get(URLSET+"chasescenes"+"?chase="+this.$props.caseID+"&sceneids="+this.newSceneOrder)
+			 .then(function (response) {
+			 location.reload(true);
+			 })
+			 .catch(function (error) {
+			 // handle error
+			 alert(error);
+			 });
+	    }
+	    
+	    
+	  }
+	});
+
+
 
 
 
@@ -68,7 +175,7 @@ Vue.component('modal', {
 
 
 Vue.component("scene-button", {
-	template : '<div> <button class="button4" @click="activescene" >{{ name }}</button> <modal v-bind:sceneID="sceneid" v-bind:show="showModal" @close="showModal = false"> </modal> <button class="button4"  id="show-modal" @click="showModal = true"> <i class="fas fa-cog"></i></button> </div>',
+	template : '<div> <button class="btn btn-secondary mb-1 mt-1" @click="activescene" >{{ name }} : {{ sceneid }}</button> <modal v-bind:sceneID="sceneid" v-bind:show="showModal" @close="showModal = false"> </modal> <button class="btn btn-dark"  id="show-modal" @click="showModal = true"> <i class="fas fa-cog"></i></button> </div>',
 	
 	data(){
 	    return {
@@ -102,6 +209,45 @@ Vue.component("scene-button", {
 	    
 	  }
 	 		}
+	
+})
+
+
+
+Vue.component("case-button", {
+	template : '<div> <button class="btn btn-info" @click="startcase" >{{ name }}</button> <case-settings v-bind:scenenids="scenenids" v-bind:name="name" v-bind:caseID="caseid" v-bind:show="showModal" @close="showModal = false"> </case-settings> <button class="btn btn-dark"  id="show-modal" @click="showModal = true"> <i class="fas fa-cog"></i></button> </div>',
+	
+	data(){
+	    return {
+	  // isActive : this.$props.select,
+	  }
+	},
+	
+	props: {
+		name : String, 
+		caseid : Number,
+// select : Boolean,
+		showModal : Boolean,
+		scenenids: String
+	},
+	
+	methods : {
+		startcase(){
+			alert("start case " + this.$props.caseid);
+// axios.get(URLSET+"scene"+"?scene="+this.$props.deviceid)
+// .then(function (response) {
+// // handle success
+// })
+// .catch(function (error) {
+// // handle error
+// alert(error);
+// })
+// .finally(function () {
+// // always executed
+// });
+	    
+	  }
+	 }
 	
 })
 
@@ -180,7 +326,7 @@ Vue.component("channel-button",{
 	       	
 	    this.isActive = !this.isActive;
 	    
-   		  axios.get(URLSET+"toogleChannelSelect"+"?channel="+this.$props.deviceid)
+   		  axios.get(URLSET+"toogleChannelSelect"+"?channel="+this.$props.id)
   	  		.then(function (response) {
   	  		 // handle success
   	  		})
@@ -192,6 +338,56 @@ Vue.component("channel-button",{
 	    }
 	}
 });
+
+
+Vue.component("case-view", {
+	template : '#caseTable',
+
+	props: {
+		casename : String, 
+		caseid : Number,
+		select : Boolean,
+		show : Boolean,
+		scenenids : String,
+		scenen: Array
+		
+	}, 
+	methods : {
+		    startScene(scene){
+		   alert("start : " + scene.id + " in " +this.$props.caseid);    	
+//		    
+// axios.get(URLSET+"device"+"?device="+this.$props.deviceid)
+// .then(function (response) {
+// // handle success
+// })
+// .catch(function (error) {
+// // handle error
+// alert(error);
+// })
+// .finally(function () {
+// // always executed
+// });
+//		    
+		  }
+    	}
+
+});
+
+
+new Vue({
+	  el: '#creatSceneTest',
+	  
+	  	data: {
+		  
+		  sceneSettings: [
+			 { id: 1},
+			 { id: 2},
+			 { id: 3}
+				    ],
+	    showModal: false
+	  }
+	  
+	});
 
 
 
@@ -210,7 +406,38 @@ new Vue({
 	});
 
 
-
+new Vue({
+	el:'#cases',
+	data:{
+		casesViews:[
+				{
+				casename: 'testCase',
+				caseid: 2,
+				show: false,
+				scenenids : '1;36;37',
+				scenen: [ 
+					{ id:1 , name :'first Rename'},
+					{ id:36 ,name :'andre'},
+					{ id:37, name :'New Scene'}
+				]
+					
+			},{
+				casename: 'testCase3',
+				caseid: 3,
+				show: false,
+				scenenids : '1;36;37;54;89',
+				scenen: [ 
+					{ id:12 , name :'first Rename2'},
+					{ id:362 ,name :'andre 2'},
+					{ id:372, name :'New Scene 2'}
+				]
+		
+			}
+		
+		]
+	}
+		
+})
 
 
 

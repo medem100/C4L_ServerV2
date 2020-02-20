@@ -209,5 +209,46 @@ public class SetValues {
 			return Response.serverError().build();
 		}
 	}
+	
+	@GET
+	@Path("/chasename")
+//	@Consumes(MediaType.TEXT_PLAIN)
+	@ApiOperation(value = "set new name vor Chase")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "    ") }) // TODO Error Message
+	public static Response setNewChaseName(@QueryParam("chase") int chase , @QueryParam("name") String name ) {
+		// logger.debug("get Values");
+		try {
+			
+			db.Update.chaseName(chase, name);
+			
+			return Response.status(200).build();
+		} catch (Exception e) {
+			// logger.error("Fail to build Json of Values ", e);
+			return Response.serverError().build();
+		}
+	}
+	
+	@GET
+	@Path("/chasescenes")
+//	@Consumes(MediaType.TEXT_PLAIN)
+	@ApiOperation(value = "set new scenes for chase")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "    ") }) // TODO Error Message
+	public static Response setNewScenesForChase(@QueryParam("chase") int chase , @QueryParam("sceneids") String sceneidssum ) {
+		// logger.debug("get Values");
+		try {
+			
+			String[] strSceneIds = sceneidssum.split(";");
+			int[] sceneIds = new int[strSceneIds.length];
+			for(int i = 0 ; i < strSceneIds.length ; i++ ) {
+				sceneIds[i] = Integer.valueOf(strSceneIds[i]);
+			}
+			db.Update.chaseScens(chase, sceneIds, new int[sceneIds.length], new int[sceneIds.length]);;
+			
+			return Response.status(200).build();
+		} catch (Exception e) {
+			// logger.error("Fail to build Json of Values ", e);
+			return Response.serverError().build();
+		}
+	}
 
 }

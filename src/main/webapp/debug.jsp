@@ -377,7 +377,135 @@ button.button4:hover {
 	<config> </config>
 
 
-	<footer> @Andre </footer>
+	<footer> <!-- 
+	<div id="caseTable">
+		<case-button v-bind:name="name" v-bind:caseid="caseid"
+			v-bind:showModal="show"> </case-button>
+
+	</div>
+ -->
+
+
+	<div id="cases">
+		<case-view v-for="caseView in casesViews"
+			v-bind:casename="caseView.casename" v-bind:caseid="caseView.caseid"
+			v-bind:select=false v-bind:show="caseView.show"
+			v-bind:scenenids="caseView.scenenids" v-bind:scenen="caseView.scenen">
+		</case-view>
+	</div>
+
+
+	<script type="x/template" id="caseTable">
+	<table style="border: 2px solid gray;">
+		<tr>
+			<th style="border: 2px solid gray;"><case-button
+					v-bind:name="casename" v-bind:caseid="caseid"
+					v-bind:showModal="show" v-bind:scenenids="scenenids"> </case-button>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				<div class="list-group">
+				 <button class="btn btn-secondary mb-1"  v-for="scene in scenen"  v-on:click="startScene(scene)" > {{ scene.name }} </button>
+				
+				</div>
+			</td>
+
+		</tr>
+
+
+	</table>
+</script> </footer>
+
+
+	<!-- template for the modal component -->
+	<script type="x/template" id="case-settings-template">
+	 <transition name="modal">
+         <div class="modal-mask" v-show="show">
+            <div class="modal-container w-50">
+                <div class="modal-header">
+                    <h2 class="text-dark" >Case Settings <h4 class="text-primary"> {{ name }}</h4>  </h2> 
+                </div>
+                <div class="modal-body">
+				
+                   <div class="input-group mb-1 mt-1">
+                        <input type="text" class="form-control w-auto " @input="handleInputNewName($event.target.value)">
+			                 
+  					 <div class="input-group-append">
+					 <button type="button" @click="renameCase" class="btn btn-warning">Rename</button>
+					</div>	
+
+					<p class="text-dark mt-3"> Reorder Scenes. Putt the Scenne ids with ;</p>
+
+					<div class="input-group mb-1">
+ 						<input type="text" class="form-control" :value="scenenids" @input="handleInputReorderScene($event.target.value)">
+ 						 <div class="input-group-append">
+   						 	<button class="btn btn-warning" type="button" @click="reorderScene" >save</button>
+  						</div>
+					</div>
+                
+                </div>
+                <div class="modal-footer text-right">
+                   <button type="button" class="btn btn-danger" @click="deleteCase()">Delete</button> <button class="btn btn-secondary" @click="closeSettings()">
+                        close
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </transition>
+</script>
+
+
+	<!-- template for the modal component -->
+<script type="x/template" id="create-new-case-template">
+ <transition name="modal">
+         <div class="modal-mask" v-show="show">
+            <div class="modal-container w-50">
+                <div class="modal-header">
+                    <h2 class="text-dark" >Create New Case  </h2> 
+                </div>
+                <div class="modal-body">
+				
+                   <div class="form-group">
+                   
+                   		<label class="text-dark" for="caseName">Name:</label>
+                        <input id="caseName" type="text" class="form-control w-auto " @input="handleInputName($event.target.value)">
+			                 
+						<label class="text-dark" for="scenenIDs" > Scene IDs. Separate with ;</label>
+						<input id="scenenIDs" type="text" class="form-control" :value="scenenids" @input="handleInputOrderScene($event.target.value)">
+ 					
+                
+                </div>
+                <div class="modal-footer text-right">
+                   <button type="button" class="btn btn-warning" @click="createCase()">create</button> <button class="btn btn-secondary" @click="closeSettings()">
+                        close
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </transition>
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- template for the modal component -->
 	<script type="x/template" id="modal-template">
@@ -385,15 +513,17 @@ button.button4:hover {
         <div class="modal-mask" v-show="show">
             <div class="modal-container">
                 <div class="modal-header">
-                    <h3>Scene Settings</h3>
+                    <h2 class="text-dark" >Scene Settings</h2>
                 </div>
                 <div class="modal-body">
-                    <label class="form-label">
-                      
-                        <input type="text" class="form-control" @input="handleInputNewName($event.target.value)">
-                    </label>
-					<button type="button" @click="renameScene" class="btn btn-warning">Rename</button>
-                    
+					
+					
+  
+          	             <input type="text" class="form-control" @input="handleInputNewName($event.target.value)">
+            			 
+							<button type="button" @click="renameScene" class="btn btn-warning mb-2">Rename</button>
+
+
                 </div>
                 <div class="modal-footer text-right">
                    <button type="button" class="btn btn-danger" @click="deleteScene()">Delete</button> <button class="btn btn-secondary" @click="closeSettings()">
@@ -405,6 +535,11 @@ button.button4:hover {
     </transition>
 </script>
 
+
+	<div id="creatSceneTest">
+		<create-case v-bind:show="showModal" @close="showModal = false"></create-case>
+		<button class="btn btn-warning"  id="show-modal" @click="showModal = true">Create Case</button>
+	</div>
 
 	<!-- app -->
 	<div id="app3">
